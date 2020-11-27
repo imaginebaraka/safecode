@@ -1,38 +1,120 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito',
+    sans-serif;
+}
+
+.header {
+  background-color: #001220;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  font-size: 3rem;
+  color: #fff;
+}
+
+.form {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-top: 50px;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+.form label {
+  display: none
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+}
+
+.length-input {
+  display: block;
+  width: 75%;
+  height: 40px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid pink;
+  outline: none;
+  color: #dddddd;
+  background-color: #001220;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.length-input::placeholder {
+  color: #a6d4fa;
+  font-style: italic;
+  opacity: 0.7;
+  font-weight: 300;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Chrome, Safari, Edge, Opera */
+.length-input::-webkit-outer-spin-button,
+.length-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
-.App-link {
-  color: #61dafb;
+.lead {
+  color: rgb(6, 1, 61);
+  padding: 8px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-align: center;
+  padding-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.code {
+  color: #bd7203
+}
+
+.btn {
+  background-color: #a6d4fa;
+  padding: 8px 16px;
+  margin: 0 10px;
+  border-radius: 5px;
+  border: 1px solid #d2eafd;
+  color: #001220;
+}
+
+.btn:focus {
+  outline: -4px solid black;
+}
+
+.btn-color {
+  box-shadow: 0 0 10px currentColor;
+}
+
+.btn-red {
+  background-color: red;
+  color: red;
+}
+
+.btn-green {
+  background-color: green;
+  color: green;
+}
+
+.btn-blue {
+  background-color: blue;
+  color: blue;
+}
+
+.controls {
+  padding-top: 30px;
 }

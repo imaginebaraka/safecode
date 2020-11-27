@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <p className="heading">safecode</p>
       </header>
+      <form className="form">
+        <div className="form-group">
+          <label htmlFor="length">Length</label>
+          <input
+            type="number"
+            name="length"
+            id="length"
+            className="length-input"
+            placeholder="Enter desired safecode length"
+          />
+        </div>
+        <p className="lead">Pick a Color</p>
+        <div className="form-group-container">
+          <div className="form-group">
+            {[
+              { id: 1, color: "red" },
+              { id: 2, color: "green" },
+              { id: 3, color: "blue" },
+            ].map(({ id, color }) => (
+              <button className={`btn btn-${color} btn-color`} type="button">
+                {id}
+              </button>
+            ))}
+          </div>
+        </div>
+      </form>
+      <div className="output">
+        <p className="lead">suggested code:</p>
+        <p className="lead code">####</p>
+      </div>
+      <div className="controls form-group">
+        <button className="btn btn-control">Prev Code</button>
+        <button className="btn btn-control">Copy</button>
+        <button className="btn btn-control">New Code</button>
+      </div>
     </div>
   );
 }
