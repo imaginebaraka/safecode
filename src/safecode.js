@@ -17,7 +17,7 @@ function produce() {
   return code;
 }
 
-export default function safecode(len) {
+export default function safecode(len, systematic = false) {
 
   let code = "";
   let numOfLoops = Math.floor(len / 4);
@@ -31,5 +31,12 @@ export default function safecode(len) {
     code += produce().slice(0, residue);
   }
 
-  return code;
+  return systematic ? code : _.shuffle(code.split("")).join("");
 }
+
+/**
+ * @todo
+ * @impliment
+ * --previous
+ * --copy to clipboard
+ */
