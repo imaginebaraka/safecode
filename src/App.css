@@ -80,7 +80,9 @@ input[type=number] {
 }
 
 .code {
-  color: #bd7203
+  color: #bd7203;
+  letter-spacing: 3px;
+  overflow-wrap: break-word;
 }
 
 .btn {
