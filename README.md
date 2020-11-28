@@ -33,4 +33,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Deployment
 
-This app is hosted on [vercel](https://vercel.com)
+This app is hosted on [vercel](https://vercel.com) at [safecode](https://safecode.vercel.app/)
