@@ -1,6 +1,7 @@
 import "./App.css";
 import safecode from "./safecode";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import Swal from "sweetalert2";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function App() {
@@ -8,12 +9,41 @@ function App() {
   const [len, setLen] = useState(0);
   const [msg, setMsg] = useState("Suggested safe code is");
   const [systematic, setSystematic] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
+  const inputRef = useRef(null);
 
   const handleChange = () => {
     if (len) {
       if (len < 8) {
-        alert("length too small");
+        Swal.fire({
+          title: "Oops",
+          text: "Entered length is too short, Minimum code length is 8",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Try again",
+          cancelButtonText: "No",
+        }).then((response) => {
+          if (response.value) {
+            inputRef.current.focus();
+            setLen(8);
+          }
+        });
+        setCode(safecode(8, systematic));
+        setSystematic((v) => !v);
+        setMsg("Suggested safe code is");
+      } else if (len > 72) {
+        Swal.fire({
+          title: "Oops",
+          text: "Entered length is too Long, Maximum code length is 72",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Try again",
+          cancelButtonText: "No",
+        }).then((response) => {
+          if (response.value) {
+            inputRef.current.focus();
+            setLen(8);
+          }
+        });
         setCode(safecode(8, systematic));
         setSystematic((v) => !v);
         setMsg("Suggested safe code is");
@@ -30,21 +60,17 @@ function App() {
   };
 
   const handleCopy = () => {
-    setCopySuccess(true);
+    Swal.fire({
+      title: "Success",
+      text: "Code Copied To Clipboard",
+      icon: "success",
+    });
   };
-
-  useEffect(() => {
-    if (copySuccess) {
-      setTimeout(() => {
-        setCopySuccess(false);
-      }, 1000);
-    }
-  }, [copySuccess]);
 
   return (
     <div className="App">
       <header className="header">
-        <p className="heading">safecode</p>
+        <p className="heading">SafeCode</p>
       </header>
       <div className="form">
         <div className="form-group">
@@ -53,6 +79,7 @@ function App() {
             type="number"
             name="length"
             id="length"
+            ref={inputRef}
             className="length-input"
             placeholder="Enter desired safecode length"
             onChange={(e) => setLen(Number(e.target.value))}
@@ -96,8 +123,6 @@ function App() {
           New Code
         </button>
       </div>
-
-      {copySuccess && <p className="lead code">code copied successfully</p>}
     </div>
   );
 }
