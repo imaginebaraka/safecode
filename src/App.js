@@ -6,14 +6,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function App() {
   const [code, setCode] = useState(safecode(8));
-  const [len, setLen] = useState(0);
+  const [len, setLen] = useState("");
   const [msg, setMsg] = useState("Suggested safe code is");
   const [systematic, setSystematic] = useState(false);
   const inputRef = useRef(null);
 
   const handleChange = () => {
-    if (len) {
-      if (len < 8) {
+    if (typeof len === "number") {
+      if (len < 8 && len >= 0) {
         Swal.fire({
           title: "Oops",
           text: "Entered length is too short, Minimum code length is 8",
@@ -24,7 +24,11 @@ function App() {
         }).then((response) => {
           if (response.value) {
             inputRef.current.focus();
-            setLen(8);
+            setLen("");
+          } else if (response.dismiss === Swal.DismissReason.cancel) {
+            setLen(12);
+            setCode(safecode(12, systematic));
+            Swal.fire("Cancelled", "Suggested code is avilable", "error");
           }
         });
         setCode(safecode(8, systematic));
@@ -41,10 +45,13 @@ function App() {
         }).then((response) => {
           if (response.value) {
             inputRef.current.focus();
-            setLen(8);
+            setLen("");
+          } else if (response.dismiss === Swal.DismissReason.cancel) {
+            setLen(12);
+            setCode(safecode(12, systematic));
+            Swal.fire("Cancelled", "Suggested code is avilable", "error");
           }
         });
-        setCode(safecode(8, systematic));
         setSystematic((v) => !v);
         setMsg("Suggested safe code is");
       } else {
@@ -78,6 +85,7 @@ function App() {
           <input
             type="number"
             name="length"
+            value={len}
             id="length"
             ref={inputRef}
             className="length-input"
